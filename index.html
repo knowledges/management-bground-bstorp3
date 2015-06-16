@@ -13,6 +13,8 @@
 	<!--[if IE 7]>
 		<link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css">
 	<![endif]-->
+	
+	<link rel="stylesheet" href="css/xx-admin.css">
 
 	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -39,18 +41,19 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a href="index.html" class="navbar-brand">
+				<i class="icon-leaf "></i>
 					SB Admin
 					<!-- <img src="" alt=""> -->
 				</a>
 			</div>
-			
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
+			<!-- top right -->
+			<ul class="nav navbar-nav navbar-right top-nav">
+				<li class="dropdown open-info">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-						<i class="glyphicon glyphicon-envelope"></i><b class="caret"></b></a>
+						<i class="icon-envelope"></i><b class="caret"></b></a>
 						<ul class="dropdown-menu message-dropdown">
 							<li class="message-preview">
-								<a href="#">
+								<a href="javascript:alert('显示这条信息');">
 									<div class="media">
 									  <div class="media-left media-middle">
 									      <img class="media-object" src="http://placehold.it/50x50" alt="...">
@@ -65,7 +68,7 @@
 								</a>
 							</li>
 							<li class="message-preview">
-								<a href="#">
+								<a href="javascript:alert('显示这条信息');">
 									<div class="media">
 									  <div class="media-left media-middle">
 									      <img class="media-object" src="http://placehold.it/50x50" alt="...">
@@ -80,7 +83,7 @@
 								</a>
 							</li>
 							<li class="message-preview">
-								<a href="#">
+								<a href="javascript:alert('显示这条信息');">
 									<div class="media">
 									  <div class="media-left media-middle">
 									      <img class="media-object" src="http://placehold.it/50x50" alt="...">
@@ -95,25 +98,55 @@
 								</a>
 							</li>
 							<li class="message-footer">
-                            	<a href="#">Read All New Messages</a>
+                            	<a href="message.html#all=1">Read All New Messages</a>
                         	</li>
 						</ul>
 				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-						<i class="glyphicon glyphicon-user"></i><span>&nbsp;baolin • qiu&nbsp;</span><b class="caret"></b>
+						<i class="icon-user"></i><span>&nbsp;baolin • qiu&nbsp;</span><b class="caret"></b>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="user.html"><i class="glyphicon glyphicon-user"></i>&nbsp;User info</a></li>
-							<li><a href="message.html"><i class="glyphicon glyphicon-envelope"></i>&nbsp;Message</a></li>
+							<li><a href="message.html#all=1"><i class="glyphicon glyphicon-envelope"></i>&nbsp;Message</a></li>
 							<li><a href="setting.html#user=1,code=22"><i class="glyphicon glyphicon-cog"></i>&nbsp;Setting</a></li>
 							<li><a href="#"><i class="glyphicon glyphicon-off"></i>&nbsp;Log Out</a></li>
 						</ul>
-					</a></li>
+					</a>
+				</li>
 			</ul>
 			
-			
-
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collpase navbar-collapse navbar-ex-collapse1" id="">
+				<ul class="nav navbar-nav side-nav">
+					<li class="active">
+						<a href="#"><i class="icon-dashboard"></i>仪表板</a>
+					</li>
+					<li >
+						<a href="#"><i class="icon-dashboard"></i>仪表板</a>
+					</li>
+					<li >
+						<a href="#"><i class="icon-dashboard"></i>仪表板</a>
+					</li>
+					<li >
+						<a href="#"><i class="icon-dashboard"></i>仪表板</a>
+					</li>
+					<li >
+						<a href="#"><i class="icon-dashboard"></i>仪表板</a>
+					</li>
+					<li >
+						<a href="#"><i class="icon-dashboard"></i>仪表板</a>
+					</li>
+					<li >
+						<a href="#"><i class="icon-dashboard"></i>仪表板</a>
+					</li>
+				</ul>
+			</div>
 		</nav>
+		
+		<div class="page-warpper">
+			
+		</div>
+
 	</div>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="js/jquery-1.10.2.js"></script>
