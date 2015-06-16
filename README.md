@@ -17,7 +17,7 @@ bootstrop 字体图标 <br/>
 在html文档中的  head 部分，引入 font-awesome.min.css 文件。 <br/>
 bootstrap.min.css <br/>
 font-awesome.min.css <br/>
-<h1>需要支持 IE7 浏览器</h1>
+<h3>需要支持 IE7 浏览器</h3>
 bootstrap.min.css <br/>
 font-awesome.min.css <br/>
 font-awesome-ie7.min.css <br/>
