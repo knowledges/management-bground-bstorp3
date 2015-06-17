@@ -31,3 +31,42 @@ font-awesome-ie7.min.css <br/>
 <h3>.pull-right 快速浮动</h3>
 .pull-left .pull-right  .clearfix
 
+
+<h1><a href="http://www.hcharts.cn/">Highcharts</a></h1>
+<!-- 
+	version 1.0 
+	封装了2个简单的统计图 待测试 
+	后续有需求在加
+-->
+<h3>折线图</h3>
+数据格式：数组
+<!-- [{
+    name: 'Tokyo',
+    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+}] -->
+<h3>饼图</h3>
+数据格式：map对象 <br/>
+<!-- 
+	[{
+	    type: 'pie',
+	    name: 'Browser share',
+	    data: [
+		        ['Firefox',   45.0],
+		        ['IE',       26.8],
+		        {
+		            name: 'Chrome',
+		            y: 12.8,
+		            sliced: true,
+		            selected: true
+		        },
+		        ['Safari',    8.5],
+		        ['Opera',     6.2],
+		        ['Others',   0.7]
+	    	]
+	}]
+ -->
+ <h4>环形图</h4>
+ pie：{	<br />
+	size:300 ;'环形图大小'<br/> 
+	innerSize:'150';内环大小 <br/>
+ }
