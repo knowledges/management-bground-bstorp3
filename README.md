@@ -25,3 +25,9 @@ font-awesome-ie7.min.css <br/>
 <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css">
 <![endif]-->
 
+<h1>流式布局容器 <h3>.container-fluid</h3></h1>
+<h3>.container-fluid</h3>
+.container-fluid：可以将固定宽度的栅格布局转换为 100% 宽度的布局<br/>
+<h3>.pull-right 快速浮动</h3>
+.pull-left .pull-right  .clearfix
+
