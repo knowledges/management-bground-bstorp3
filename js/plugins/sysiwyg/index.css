@@ -1,0 +1,73 @@
+/* this CSS is not part of the widget, it is here just as an example of the demo page styling.... Don't copy this one, roll your own. One
+ * of the key things about the widget is that it allows you to do your own styling!
+ */
+
+#editor {
+	max-height: 250px;
+	height: 250px;
+	background-color: white;
+	border-collapse: separate; 
+	border: 1px solid rgb(204, 204, 204); 
+	padding: 4px; 
+	box-sizing: content-box; 
+	-webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset; 
+	box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+	border-top-right-radius: 3px; border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px; border-top-left-radius: 3px;
+	overflow: scroll;
+	outline: none;
+  text-align: left;
+  text-indent: 2em;
+}
+#voiceBtn {
+  width: 20px;
+  color: transparent;
+  background-color: transparent;
+  transform: scale(2.0, 2.0);
+  -webkit-transform: scale(2.0, 2.0);
+  -moz-transform: scale(2.0, 2.0);
+  border: transparent;
+  cursor: pointer;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+div[data-role="editor-toolbar"] {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.dropdown-menu a {
+    cursor: pointer;
+}
+
+.btn-file {
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+.btn-file input{
+    position: absolute;
+    display: inline-block;
+    width: 40px;
+    left: 0;
+    top: 6px;
+    z-index: 9;
+
+  /* older safari/Chrome browsers */  
+   -webkit-opacity: 0;  
+   /* Netscape and Older than Firefox 0.9 */  
+   -moz-opacity: 0;  
+   /* Safari 1.x (pre WebKit!) 老式khtml内核的Safari浏览器*/  
+   -khtml-opacity: 0;  
+   /*This works in IE 8 & 9 too*/  
+   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";  
+   /*IE4-IE9*/  
+   filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);  
+   /* IE 4-9 */  
+   filter:alpha(opacity=0);  
+   /* IE9 + etc...modern browsers */  
+   opacity: 0;  
+}
