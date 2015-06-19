@@ -46,7 +46,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="wysiwyg">
+					<div class="wysiwyg" id="wysiwyg">
 					</div>
 				</div>
 			</div>
@@ -68,6 +68,8 @@
 	<script>
 	$(function(){
 		$('#editor').wysiwyg();
+
+		$.wysiwyg();
 
 		function initToolbarBootstrapBindings() {
 			var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
