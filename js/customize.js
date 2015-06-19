@@ -90,18 +90,17 @@
 	 */
 	$.wysiwyg = function(option){
 		var html = [];
-		
 		html.push('<form action="" id="publish-articles" class="form-horizontal">');
 		html.push('<div class="form-group  text-right">');
 		html.push('<label for="art-name" class="col-sm-2">标题：</label>');
 		html.push('<div class="col-sm-9">	');
-		html.push('<input type="text" id="art-name" class="form-control" placeholder="文章名称">');
+		html.push('<input type="text" id="art-name" class="form-control" value="'+option.name!=undefined? option.name:""+'" placeholder="文章名称">');
 		html.push('</div>');
 		html.push('</div>');
 		html.push('<div class="form-group  text-right">');
 		html.push('<label for="art-funame" class="col-sm-2">副标题：</label>');
 		html.push('<div class="col-sm-9">	');
-		html.push('<input type="text" id="art-funame" class="form-control" placeholder="文章副标题">');
+		html.push('<input type="text" id="art-funame" class="form-control" value="'+option.title!=undefined? option.title:""+'" placeholder="文章副标题">');
 		html.push('</div>');
 		html.push('</div>');
 		html.push('<div class="form-group  text-right">');
@@ -181,7 +180,7 @@
 		html.push('</div>');
 		html.push('<input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">');
 		html.push('</div>');
-		html.push('<div id="editor">Go ahead&hellip;');
+		html.push('<div id="editor">"'+option.contains !=undefined ? option.contains:"Go ahead&hellip;" +'"');
 		html.push('</div>');
 		html.push('</div>');
 		html.push('</div>');					
@@ -193,6 +192,9 @@
 		html.push('</div>');
 		html.push('</div>');
 		html.push('</form>');
+
+		$("#wysiwyg").appendTo(html.join(''));
+
 	}
 
 
