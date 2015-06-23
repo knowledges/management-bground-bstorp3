@@ -87,20 +87,32 @@
 	/**
 	 *	编辑器
 	 *  所见即所得
+	 *  TODO 下拉数据需要重新同步
 	 */
-	$.wysiwyg = function(option){
+	$.getWysiwyg = function(option,id){
 		var html = [];
-		html.push('<form action="" id="publish-articles" class="form-horizontal">');
+		var data = option;
+		var name = "",
+			title = "",
+			contains = "Go ahead&hellip;";
+
+		if (data != undefined || data != "") {
+			name = data.name != undefined ? data.name : "";
+			title = data.title != undefined ? data.title : "";
+			contains = data.contains != undefined ? data.contains : "Go ahead&hellip;";
+		}
+		//TODO 缺少表单发送地址
+		html.push('<form action="" enctype="multipart/form-data" id="publish-articles" class="form-horizontal">');
 		html.push('<div class="form-group  text-right">');
 		html.push('<label for="art-name" class="col-sm-2">标题：</label>');
 		html.push('<div class="col-sm-9">	');
-		html.push('<input type="text" id="art-name" class="form-control" value="'+option.name!=undefined? option.name:""+'" placeholder="文章名称">');
+		html.push('<input type="text" id="art-name" class="form-control" value="'+name+'" placeholder="文章名称">');
 		html.push('</div>');
 		html.push('</div>');
 		html.push('<div class="form-group  text-right">');
 		html.push('<label for="art-funame" class="col-sm-2">副标题：</label>');
 		html.push('<div class="col-sm-9">	');
-		html.push('<input type="text" id="art-funame" class="form-control" value="'+option.title!=undefined? option.title:""+'" placeholder="文章副标题">');
+		html.push('<input type="text" id="art-funame" class="form-control" value="'+title+'" placeholder="文章副标题">');
 		html.push('</div>');
 		html.push('</div>');
 		html.push('<div class="form-group  text-right">');
@@ -180,7 +192,7 @@
 		html.push('</div>');
 		html.push('<input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">');
 		html.push('</div>');
-		html.push('<div id="editor">"'+option.contains !=undefined ? option.contains:"Go ahead&hellip;" +'"');
+		html.push('<div id="editor">"'+contains+'"');
 		html.push('</div>');
 		html.push('</div>');
 		html.push('</div>');					
@@ -188,13 +200,73 @@
 		html.push('<div class="form-group">');
 		html.push('<div class="col-lg-2"></div>');
 		html.push('<div class="col-lg-10">');
-		html.push('<button class="btn btn-primary btn-lg">发布</button>');
+		html.push('<button id="btn-submit" class="btn btn-primary btn-lg">发布</button>');
 		html.push('</div>');
 		html.push('</div>');
 		html.push('</form>');
 
-		$("#wysiwyg").appendTo(html.join(''));
+		$('#'+id).prepend(html.join(''));
 
+		$("#btn-submit").unbind('click').click(function(){
+			alert('提交事件');
+		});
+
+		$('#editor').wysiwyg();
+
+		function initToolbarBootstrapBindings() {
+			var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
+					'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+					'Times New Roman', 'Verdana'
+				],
+				fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+			$.each(fonts, function(idx, fontName) {
+				fontTarget.append($('<li><a data-edit="fontName ' + fontName + '" style="font-family:\'' + fontName + '\'">' + fontName + '</a></li>'));
+			});
+			$('a[title]').tooltip({
+				container: 'body'
+			});
+			$('.dropdown-menu input').click(function() {
+					return false;
+				})
+				.change(function() {
+					$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');
+				})
+				.keydown('esc', function() {
+					this.value = '';
+					$(this).change();
+				});
+
+			$('[data-role=magic-overlay]').each(function() {
+				var overlay = $(this),
+					target = $(overlay.data('target'));
+				overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+			});
+			if ("onwebkitspeechchange" in document.createElement("input")) {
+				var editorOffset = $('#editor').offset();
+				$('#voiceBtn').css('position', 'absolute').offset({
+					top: editorOffset.top,
+					left: editorOffset.left + $('#editor').innerWidth() - 35
+				});
+			} else {
+				$('#voiceBtn').hide();
+			}
+		};
+
+		function showErrorAlert(reason, detail) {
+			var msg = '';
+			if (reason === 'unsupported-file-type') {
+				msg = "Unsupported format " + detail;
+			} else {
+				console.log("error uploading file", reason, detail);
+			}
+			$('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
+				'<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
+		};
+		initToolbarBootstrapBindings();
+		$('#editor').wysiwyg({
+			fileUploadError: showErrorAlert
+		});
+		window.prettyPrint && prettyPrint();
 	}
 
 
