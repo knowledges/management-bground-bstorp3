@@ -18,6 +18,8 @@
 
 	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<!-- 时间选择器 -->
+	<link rel="stylesheet" href="css/datatimepick/bootstrap-datetimepicker.min.css">
 	
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -54,8 +56,77 @@
 							</div>
 						</div>
 						<div class="panel-body">
-							table
-
+							<table class="table table-bordered table-striped table-hover tables">
+								<thead class="text-center">
+									<tr>
+										<td>ID</td>
+										<td>标题</td>
+										<td>菜单</td>
+										<td>类型</td>
+										<td>点击率</td>
+										<td>操作</td>
+									</tr>
+								</thead>
+								<tbody class="text-center">
+									<tr>
+										<td>1</td>
+										<td>XXXX</td>
+										<td>XXXX</td>
+										<td>XXXXX</td>
+										<td>XX</td>
+										<td>
+											<a href="javascript:alert('查看');" class="search">
+												<i class="icon-search"></i>
+											</a>
+											<a href="javascript:alert('修改');" class="edit">
+												<i class="icon-edit"></i>
+											</a>
+											<a href="javascript:alert('删除');" class="del">
+												<i class="icon-trash"></i>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>XXXX</td>
+										<td>XXXX</td>
+										<td>XXXXX</td>
+										<td>XX</td>
+										<td>
+											<a href="javascript:alert('查看');" class="search">
+												<i class="icon-search"></i>
+											</a>
+											<a href="javascript:alert('修改');" class="edit">
+												<i class="icon-edit"></i>
+											</a>
+											<a href="javascript:alert('删除');" class="del">
+												<i class="icon-trash"></i>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="flooter text-right">
+							<nav class="pag-nav">
+								<ul class="pagination">
+									<li>
+										<a href="#" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<li><a href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#">5</a></li>
+									<li>
+										<a href="#" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
 						</div>
 					</div>
 				</div>
@@ -69,7 +140,9 @@
 	<script src="js/jquery-1.10.2.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="js/bootstrap.min.js"></script>
-	
+	<!-- 时间选择器 -->
+	<script src="js/plugins/datatimepick/bootstrap-datetimepicker.js"></script>
+	<script src="js/plugins/datatimepick/locales/bootstrap-datetimepicker.fr.js"></script>
 	<script>
 	$(function(){
 
