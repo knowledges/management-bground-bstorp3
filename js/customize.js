@@ -269,5 +269,30 @@
 		window.prettyPrint && prettyPrint();
 	}
 
+	$.dataTimer = function(id){
+
+		var html = [];
+
+		html.push('开始&nbsp;&nbsp;<div class="input-append date start-data dataTimer" id="start-data">');
+		html.push('<input size="16" type="text" value="" readonly>');
+		html.push('<span class="add-on"><i class="icon-time"></i></span>');
+		html.push('</div>');
+		html.push('-结束&nbsp;&nbsp;<div class="input-append date end-data dataTimer" id="end-data">');
+		html.push('<input size="16" type="text" value="" readonly>');
+		html.push('<span class="add-on"><i class="icon-time"></i></span>');
+		html.push('</div>');
+		html.push('<button class="btn btn-primary">');
+		html.push('<i class="icon-search"></i>');
+		html.push('查询');
+		html.push('</button>');
+
+		$('#'+id).prepend(html.join(''));
+
+		$("#start-data,#end-data").datetimepicker({
+			format: 'yyyy/mm/dd hh:ii',
+			autoclose:true
+			// minView:2//日期时间选择器所能够提供的最精确的时间选择视图。
+		});
+	}
 
 })(jQuery);
