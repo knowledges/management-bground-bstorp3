@@ -127,28 +127,42 @@
 						<a href="charts.html#idx=1" target="page-frame"><i class="icon-dashboard"></i>仪表板</a>
 					</li>
 					<li >
-						<a href="articles.html#idx=2" target="page-frame"><i class="icon-edit"></i>发表文章</a>
+						<a href="javascript:;;" data-target="#edit-collpsed"  data-toggle="collapse">
+							<i class=" icon-paste"></i>
+								 表单
+							<i class="icon-resize-full"></i>
+						</a>
+							<ul id="edit-collpsed" class="collapse">
+								<li>
+									<a href="articles.html#idx=2" target="page-frame">
+									<i class="icon-edit"></i>
+									文章发布
+									</a>
+								</li>
+								<li class="active">
+									<a href="registered.html" target="page-frame">
+										<i class="icon-eye-open"></i>
+										注册
+									</a>
+								</li>
+							</ul>
+						
 					</li>
 					<li >
-						<a href="table.html#idx=3" target="page-frame"><i class="icon-table"></i>表格</a>
-					</li>
-					<li >
-						<a href="#" target="page-frame"><i class="icon-dashboard"></i>仪表板</a>
-					</li>
-					<li >
-						<a href="#" target="page-frame"><i class="icon-dashboard"></i>仪表板</a>
-					</li>
-					<li >
-						<a href="#" target="page-frame"><i class="icon-dashboard"></i>仪表板</a>
-					</li>
-					<li >
-						<a href="http://www.baidu.com" target="page-frame"><i class="icon-dashboard"></i>仪表板</a>
+						<a href="javascript:;;" data-target="#table-collpsed"  data-toggle="collapse">
+							<i class="icon-table"></i>
+							表格
+						</a>
+						<ul id="table-collpsed" class="collapse">
+							<li><a href="table.html#idx=3" target="page-frame">表格A</a></li>
+							<li><a href="" target="page-frame">表格B</a></li>
+						</ul>
 					</li>
 				</ul>
 			</div>
 		</nav>
 		
-		<iframe id="page-frame" name="page-frame" src="table.html"  width="100%" ></iframe>
+		<iframe id="page-frame" name="page-frame" src="registered.html"  width="100%" ></iframe>
 
 	</div>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
