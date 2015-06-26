@@ -122,7 +122,6 @@
 		var tagIdx = 1,limit=10,pageSize=0;
 
 		$.dataTimer("data-timer");
-		$.getWysiwyg("",'edit-center');
 
 		pageation ('begin','end',tagIdx,limit);
 
@@ -144,19 +143,36 @@
 					html.push('<td>'+val.info+'</td>');
 					html.push('<td>'+val.count+'</td>');
 					html.push('<td>');
-					html.push('<button class="btn btn-success btn-xs">');
+					html.push('<button class="btn btn-success btn-xs"  data-toggle="modal" data-target=".bs-example-modal-lg" data-idx="'+val.id+'" data-prop="serch">');
 					html.push('<i class="icon-search"></i>');
 					html.push('</button>');
-					html.push('<button class="btn btn-warning btn-xs">');
+					html.push('<button class="btn btn-warning btn-xs"  data-toggle="modal" data-target=".bs-example-modal-lg" data-idx="'+val.id+'" data-prop="edit">');
 					html.push('<i class="icon-edit"></i>');
 					html.push('</button>');
-					html.push('<button class="btn btn-danger btn-xs">');
+					html.push('<button class="btn btn-danger btn-xs"  data-idx="'+val.id+'" data-prop="del">');
 					html.push('<i class="icon-trash"></i>');
 					html.push('</button>');
 					html.push('</td>');
 					html.push('</tr>');
 				});
 				$("#table-info").empty().prepend(html.join(''));
+
+				$('.btn').unbind('click').click(function(event) {
+					var id = $(this).data('idx'),prop = $(this).data('prop');
+
+					switch(prop){
+						case "serch":
+							$.getWysiwyg("",'edit-center');
+							break;
+						case "edit":
+							$.getWysiwyg("",'edit-center');
+							break;
+						case "del":
+							alert('删除');
+							break;
+					}
+
+				});
 
 				$("#pagging").pagging({
 					sum: pageSize,

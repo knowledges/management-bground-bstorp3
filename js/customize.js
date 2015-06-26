@@ -205,7 +205,7 @@
 		html.push('</div>');
 		html.push('</form>');
 
-		$('#'+id).prepend(html.join(''));
+		$('#'+id).empty().prepend(html.join(''));
 
 		$("#btn-submit").unbind('click').click(function(){
 			alert('提交事件');
@@ -288,7 +288,7 @@
 		html.push('<i class="icon-search"></i> &nbsp;查询');
 		html.push('</button>');
 
-		$('#'+id).prepend(html.join(''));
+		$('#'+id).empty().prepend(html.join(''));
 
 		$("#start-data,#end-data").datetimepicker({
 			format: 'yyyy/mm/dd hh:ii',
