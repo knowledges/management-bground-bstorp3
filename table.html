@@ -51,8 +51,8 @@
 					<div class="panel panel-success">
 						<div class="panel-heading">
 							<div class="row">
-								<div class="col-md-4">
-									<i class="icon-table"></i>
+								<div class="col-md-4 nav-tag">
+									<i class="icon-table icon-2x"></i>
 									表格
 								</div>
 								<div class="col-md-8 text-right">
@@ -89,7 +89,7 @@
 		</div>
 	</div>
 
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="mask-main">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -100,6 +100,10 @@
 				</div>
 				<div class="modal-body" id="edit-center">
 				</div>
+				<div class="modal-footer" id="mask-btn" style="display:none;">
+			        <button type="button" class="btn btn-success" data-dismiss="modal">取消</button>
+			        <button type="button" class="btn btn-danger">删除</button>
+			      </div>
 			</div>
 		</div>
 	</div>
@@ -143,13 +147,13 @@
 					html.push('<td>'+val.info+'</td>');
 					html.push('<td>'+val.count+'</td>');
 					html.push('<td>');
-					html.push('<button class="btn btn-success btn-xs"  data-toggle="modal" data-target=".bs-example-modal-lg" data-idx="'+val.id+'" data-prop="serch">');
+					html.push('<button class="btn btn-success btn-xs btn-icon" data-toggle="modal" data-target=".bs-example-modal-lg" data-idx="'+val.id+'" data-prop="serch">');
 					html.push('<i class="icon-search"></i>');
 					html.push('</button>');
-					html.push('<button class="btn btn-warning btn-xs"  data-toggle="modal" data-target=".bs-example-modal-lg" data-idx="'+val.id+'" data-prop="edit">');
+					html.push('<button class="btn btn-warning btn-xs btn-icon" data-toggle="modal" data-target=".bs-example-modal-lg" data-idx="'+val.id+'" data-prop="edit">');
 					html.push('<i class="icon-edit"></i>');
 					html.push('</button>');
-					html.push('<button class="btn btn-danger btn-xs"  data-idx="'+val.id+'" data-prop="del">');
+					html.push('<button class="btn btn-danger btn-xs btn-icon" data-toggle="modal" data-target=".bs-example-modal-lg" data-idx="'+val.id+'" data-prop="del">');
 					html.push('<i class="icon-trash"></i>');
 					html.push('</button>');
 					html.push('</td>');
@@ -168,7 +172,8 @@
 							$.getWysiwyg("",'edit-center');
 							break;
 						case "del":
-							alert('删除');
+							$("#edit-center").empty().html('你确实要删除吗！');
+							$("#mask-main,#mask-btn").show();
 							break;
 					}
 
