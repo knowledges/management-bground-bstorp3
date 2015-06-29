@@ -72,13 +72,13 @@ font-awesome-ie7.min.css <br/>
  }
 
  <h1>iframe 高度动态自适应</h1>
- 使用iframe  自适应 高度 会牵扯到很多问题，兼容、跨域...... 而解决这个问题可以使用父页面和框架子页面相互配合，框架子页面想父页面传递其高度，父页面则获取高度，然后改变iframe 的高度<br/>
+ 使用iframe  自适应 高度 会牵扯到很多问题，兼容、跨域、缓存...... 所有我们尽量采用 javascript 绑定点击事件。<br/>
  
 
  <h1><a href="http://www.bootcss.com/p/bootstrap-datetimepicker/">日期时间选择器</a></h1>
  <h3>Bootstrap日期和时间表单组件。</h3>
 
-<h1>瀑布流</h1>
+<h1><a href="falls.html">瀑布流</a></h1>
 <h3>初始化</h3>
 描述场景：在main 下面有多个 thumbnail 的集合，thumbnail 里放着 一张 宽225，高自适应的图片 
 <h4>瀑布流 的一个特点就是定宽不定高</h4> 	
