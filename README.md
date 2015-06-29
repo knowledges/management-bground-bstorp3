@@ -93,7 +93,7 @@ I.首先判断 i 是否小于 oBoxCount  是就添加到 hArr 的数组中   否
 II. 获取 hArr 里的最小值 ，通过 Math.min.apply(null,hArr) 获取最小值 hMin , 然后再获取最小值的索引，最后把 thumbnails[i] 下第二行的第一个值，添加到 hArr 中 最小的一个数组下面 。<br>
 III. <em>此时注意</em> 根据以上操作， 从第二行往下，所有的thumbnails 全部重叠到 第一行最小值下面了。 所有 每添加一次到hArr 最小数组中就要把自身高度累加到 对应下标的数组里。就能解上面的问题。<br>
 
-<h3>滚轮事件</h3>
+<h3><a href="falls.html">滚轮事件</a></h3>
 <h4>判断  最后一张图片的高度 <  屏幕可视区域 + 滚轮高度  ? true : false </h4>
 <h5>实现步骤：</h5>
 1.获取 所有 thumbnail 元素  【thumbnails】 <br>
@@ -102,6 +102,21 @@ III. <em>此时注意</em> 根据以上操作， 从第二行往下，所有的t
 4.获取可是区域 高度 $(window).height()<br>
 5.比较 true : false <br>
 I.true: 追加，false : 不显示。
+
+<h1><a href="">分页</a></h1>
+分页格式 I.  1 2 3 4 5 6 7 8 9... 12 <br>
+		  II. 1 2 ...5 6 7 8 9 ... 11 12 <br>
+		  II. 1 2 ....5 6 7 8 9 10 11 12 <br>
+<h5>实现步骤：</h5>
+根据上面的 格式 我们 分两种情况来判断。
+1.总页数小于11 。就直接展示 pager_length
+
+2.总页数 > 10 分别 以上面三种情况来展示
+首先我们先确定 左右两边 以 2 个开头 和 结尾 header tail
+
+I.
+II.
+III.
 
 
 
