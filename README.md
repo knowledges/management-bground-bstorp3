@@ -104,19 +104,47 @@ III. <em>此时注意</em> 根据以上操作， 从第二行往下，所有的t
 I.true: 追加，false : 不显示。
 
 <h1><a href="">分页</a></h1>
-分页格式 I.  1 2 3 4 5 6 7 8 9... 12 <br>
-		  II. 1 2 ...5 6 7 8 9 ... 11 12 <br>
-		  II. 1 2 ....5 6 7 8 9 10 11 12 <br>
+分页格式 	I. 1 2 3 4 5 6 7 8 9... 12 <br>
+		   II. 1 2 ...5 6 7 8 9 ... 11 12 <br>
+		  III. 1 2 ....5 6 7 8 9 10 11 12 <br>
 <h5>实现步骤：</h5>
 根据上面的 格式 我们 分两种情况来判断。
-1.总页数小于11 。就直接展示 pager_length
+1.总页数（pager_length）小于11 。就直接展示 
 
-2.总页数 > 10 分别 以上面三种情况来展示
-首先我们先确定 左右两边 以 2 个开头 和 结尾 header tail
+2.总页数（pager_length） > 10 分别 以上面三种情况来展示
+	首先我们先确定 左右两边 展示个数 为2  分别是 开头 和 结尾 header tail <br/>
+	<strong>然后我们先做第一种情况左边没有 省略号 的</strong> <br/>
+	current 当前页 <br/>
+	offset = Math.floor(pager_length/2) 中间页 <br/>
+	main_page = pager_length-header-tail  页面显示..4 5 6 7 8 9 ... 4-9 中间的值 为 main_page <br/>
+	I.首先判断  current <= offset + 1 <br/>
+	  再循环 for( var i =0; i < header + main_page ; i++) <br/>
+	  然后 加入... 的 li <br/>
+	  最后打印最后 2 个 值 for (var i = pager_length - tail +1; i <= pager_length; i++)  <br/>
 
-I.
-II.
-III.
+
+	<strong>根据上面的内容我们可以推出右边没有 省略号</strong><br/>
+	II. 首先判断  current >= pager_length-offset <br/>
+		再循环    for(var i = 0 ; i< header ; i ++) <br/>
+		然后再加入....<br/>
+		最后打印省略后面的值 for(var i = pager_length - main_page ; i <  pager_length ; i++)<br/>
+
+	<strong> 最后一种 两边带省略号的 是最难的：但是只要知道 从第几个开始到第几结束 就会发现容易了很多 </strong><br/>
+	 开始页 offset_m =（ main_length - 1 ）/ 2; <br/>
+	 结束页	counter = current + offset_m<br/>
+	 既然知道了我们想要的东西，那么开始实现：<br/>
+	 1. 首先遍历 前2个值 for(var i = 0 ; i< header ; i ++) <br/><br/>
+	 2. 然后再加入....<br/><br/>
+	 3. 再遍历中间的值 以 offset_m  开始 ，counter 结束 遍历 for (var i = offset_m+1; i <= counter  ; i++)<br/>
+	 4.  然后再加入....<br/><br/>
+	 5.最后在遍历最后 2个值  for(var i =  (pager_length- tall)+1 ;i<= pager_length ; i ++ )<br/>
+
+	 
+
+
+	
+
+
 
 
 
