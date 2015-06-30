@@ -120,15 +120,12 @@ I.true: 追加，false : 不显示。
 	I.首先判断  current <= offset + 1 <br/>
 	  再循环 for( var i =0; i < header + main_page ; i++) <br/>
 	  然后 加入... 的 li <br/>
-	  最后打印最后 2 个 值 for (var i = pager_length - tail +1; i <= pager_length; i++)  <br/>
-
-
+	  最后打印最后 2 个 值 for (var i = pager_length - tail +1; i <= pager_length; i++)<br/>
 	<strong>根据上面的内容我们可以推出右边没有 省略号</strong><br/>
 	II. 首先判断  current >= pager_length-offset <br/>
 		再循环    for(var i = 0 ; i< header ; i ++) <br/>
 		然后再加入....<br/>
 		最后打印省略后面的值 for(var i = pager_length - main_page ; i <  pager_length ; i++)<br/>
-
 	<strong> 最后一种 两边带省略号的 是最难的：但是只要知道 从第几个开始到第几结束 就会发现容易了很多 </strong><br/>
 	 开始页 offset_m =（ main_length - 1 ）/ 2; <br/>
 	 结束页	counter = current + offset_m<br/>
