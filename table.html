@@ -15,6 +15,7 @@
 	<![endif]-->
 
 	<link rel="stylesheet" href="css/xx-admin.css">
+	<link rel="stylesheet" href="css/xx-mask.css">
 
 	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -34,6 +35,10 @@
 	<![endif]-->
 </head>
 <body>
+	<div id="iFrm-load" class="mask-load">
+		<div class="mask-img"></div>
+	</div>
+
 	<div class="page-warpper">
 		<div class="container-fluid">
 			<div class="row publish-row">
@@ -100,7 +105,7 @@
 				</div>
 				<div class="modal-body" id="edit-center">
 				</div>
-				<div class="modal-footer" id="mask-btn">
+				<div class="modal-footer" id="mask-btn" style="display:none;">
 			        <button type="button" class="btn btn-success" data-dismiss="modal">取消</button>
 			        <button type="button" class="btn btn-danger">删除</button>
 			      </div>
@@ -160,7 +165,9 @@
 					html.push('</tr>');
 				});
 				$("#table-info").empty().prepend(html.join(''));
-
+				setTimeout(function () {
+					$("#iFrm-load").fadeOut(1000);
+				},500);
 				$('.btn').unbind('click').click(function(event) {
 					var id = $(this).data('idx'),prop = $(this).data('prop');
 
@@ -176,7 +183,6 @@
 							$("#mask-main,#mask-btn").show();
 							break;
 					}
-
 				});
 
 				$("#pagging").pagging({
@@ -184,6 +190,7 @@
 					param:param,
 					current: tagIdx,
 					callback: function(idx, param) {
+						$("#iFrm-load").fadeIn(1000);
 					    tagIdx = idx;
 					    pageation ("startTime","endTime",tagIdx,limit);
 					}

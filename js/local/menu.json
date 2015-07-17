@@ -1,0 +1,41 @@
+{
+    "response": {
+        "list": [
+            {
+                "name": "图表",
+                "childList": [
+                    {
+                        "childname": "仪表图",
+                        "path": "charts.html"
+                    }
+                ]
+            },
+            {
+                "name": "表单",
+                "childList": [
+                    {
+                        "childname": "文章发布",
+                        "path": "articles.html"
+                    },
+                    {
+                        "childname": "注册",
+                        "path": "registered.html"
+                    },
+                    {
+                        "childname": "瀑布流",
+                        "path": "falls.html"
+                    }
+                ]
+            },
+            {
+                "name": "表格",
+                "childList": [
+                    {
+                        "childname": "文章点击率",
+                        "path": "table.html"
+                    }
+                ]
+            }
+        ]
+    }
+}
