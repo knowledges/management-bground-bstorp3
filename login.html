@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="数据统计后台管理">
 	<meta name="author" content="邱宝林">
@@ -13,9 +13,7 @@
 	<!--[if IE 7]>
 		<link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css">
 	<![endif]-->
-
 	<link rel="stylesheet" href="css/xx-admin.css">
-
 	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 	
@@ -27,31 +25,102 @@
 	<![endif]-->
 </head>
 <body>
-		<div class="container">
-			<div class="alert">
-				<strong>骚年！快点加入我们吧！</strong>
-			</div>
-			<form class="form-horizontal form-signin" action="index.html">
-				<h1 class="form-signin-heading">
-					<strong> 简约 管理后台</strong>
-				</h1>
-				
-				<lable class="src-only" for="username"></lable>	
-				<input type="text" id="username" name="username" class="form-control" placeholder="请输入用户名" required autofocus>
-				<lable class="src-only" for="password"></lable>		
-				<input type="text" id="password" name="password" class="form-control" placeholder="请输入密码">
-				<div class="checkbox">
-					<lable>
-						<input type="checkbox" value="记住我">
-						记住我
-					</lable>
-				</div>
-				<button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>	
-			</form>
+	<div class="container">
+		<div class="alert">
+			<strong>骚年！快点加入我们吧！</strong>
 		</div>
+		<div class="form-horizontal form-signin">
+			<h1 class="form-signin-heading">
+				<strong> 简约 管理后台</strong>
+			</h1>
+			
+			<lable class="src-only" for="username"></lable>	
+			<input type="text" id="username" name="username" class="form-control" placeholder="请输入用户名" required autofocus>
+			<lable class="src-only" for="password"></lable>		
+			<input type="text" id="password" name="password" class="form-control" placeholder="请输入密码">
+			<div class="checkbox">
+				<lable>
+					<input type="checkbox" value="记住我" id="isRemember">
+					记住我
+				</lable>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" data-toggle="modal" data-target=".bs-example-modal-lg" id="login">登陆</button>	
+		</div>
+	</div>
+	
+
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="mask-main">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" aria-label="Close" type="button">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title" id="myLargeModalLabel">模态窗口</h4>
+				</div>
+				<div class="modal-body" id="edit-center">
+				</div>
+				<div class="modal-footer" id="mask-btn" style="display:none;">
+			        <button type="button" class="btn btn-success" data-dismiss="modal">取消</button>
+			        <button type="button" class="btn btn-danger">删除</button>
+			    </div>
+			</div>
+		</div>
+	</div>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="js/jquery-1.10.2.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.placeholder.js"></script>
+	<script src="js/frame.js"></script>
 </body>
+<script>
+	$(function () {
+	    // Invoke the plugin
+	    $('input, textarea').placeholder();
+
+	    var aValue = function(){
+	    	if (!(this instanceof aValue)) {
+	    		return new aValue();
+	    	}
+			this.username = $("#username").val(),
+			this.password = $("#password").val(),
+			this.isRemember = $("#isRemember").is(':checked')
+	    }
+
+	    $("#login").unbind('click').click(function(event) {
+			var value = new aValue();
+			if (validateFrm(value)) {
+				// $("#mask-main").hide();
+				window.location.href="index.html";
+				COOKIE.setCookie("username",value.username);				
+			} 
+
+	    });
+
+	    function validateFrm(data){
+	    	if (validate.isEmptys(data.username)) {
+	    		$("#edit-center").empty().html('用户名不能为空');
+	    		$("#mask-main").show();
+	    		return false;
+	    	} else if(!validate.isUserPwd(data.username)){
+	    		$("#edit-center").html("用户名只能是包含字母数字下划线6到16位字符");
+	    		$("#mask-main").show();
+	    		return false;
+	    	}
+
+	    	if (validate.isEmptys(data.password)) {
+	    		$("#edit-center").html("密码不能为空");
+	    		$("#mask-main").show();
+	    		return false;
+	    	} else if(!validate.isUserPwd(data.username)){
+	    		$("#edit-center").html("密码只能是包含字母数字下划线6到16位字符");
+	    		$("#mask-main").show();
+	    		return false;
+	    	}
+	    	return true;
+	    }
+
+	});
+</script>
 </html>

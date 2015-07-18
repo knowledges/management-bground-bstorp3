@@ -77,4 +77,75 @@ font-awesome-ie7.min.css <br/>
 
  <h1><a href="http://www.bootcss.com/p/bootstrap-datetimepicker/">日期时间选择器</a></h1>
  <h3>Bootstrap日期和时间表单组件。</h3>
+<<<<<<< HEAD
  
+=======
+
+<h1><a href="falls.html">瀑布流</a></h1>
+<h3>初始化</h3>
+描述场景：在main 下面有多个 thumbnail 的集合，thumbnail 里放着 一张 宽225，高自适应的图片 
+<h4>瀑布流 的一个特点就是定宽不定高</h4> 	
+<h5>实现步骤：</h5>
+1.获取 所有 thumbnail 元素  【thumbnails】 <br>
+2.获取页面的宽度 【pageWidth】<br>
+3.计算 一个 thumbnail 的 宽度 【oBox】<br>
+4.计算 一页显示几列  （pageWidth/oBox）【oBoxCount】<br>
+5. 让 main 内元素居中<br>
+6.存放每一列的高度 ,遍历数组【thumbnails】for (var i = 0; i < thumbnails.length; i++) <br>
+I.首先判断 i 是否小于 oBoxCount  是就添加到 hArr 的数组中   否则  :<br>
+II. 获取 hArr 里的最小值 ，通过 Math.min.apply(null,hArr) 获取最小值 hMin , 然后再获取最小值的索引，最后把 thumbnails[i] 下第二行的第一个值，添加到 hArr 中 最小的一个数组下面 。<br>
+III. <em>此时注意</em> 根据以上操作， 从第二行往下，所有的thumbnails 全部重叠到 第一行最小值下面了。 所有 每添加一次到hArr 最小数组中就要把自身高度累加到 对应下标的数组里。就能解上面的问题。<br>
+
+<h3><a href="falls.html">滚轮事件</a></h3>
+<h4>判断  最后一张图片的高度 <  屏幕可视区域 + 滚轮高度  ? true : false </h4>
+<h5>实现步骤：</h5>
+1.获取 所有 thumbnail 元素  【thumbnails】 <br>
+2.获取 最后一张图 的高度 + 自身高度的一半 【我这边是想当最后一张图被加载一半的时候，继续加载数据】 <br> 
+3.获取 滚动高度  document.body.scrollTop || document.documentElement.scrollTop<br>
+4.获取可是区域 高度 $(window).height()<br>
+5.比较 true : false <br>
+I.true: 追加，false : 不显示。
+
+<h1><a href="">分页</a></h1>
+分页格式 	<br>I. 1 2 3 4 5 6 7 8 9... 12 <br>
+		   II. 1 2 ...5 6 7 8 9 ... 11 12 <br>
+		  III. 1 2 ....5 6 7 8 9 10 11 12 <br>
+<h5>实现步骤：</h5>
+根据上面的 格式 我们 分两种情况来判断。
+1.总页数（pager_length）小于11 。就直接展示 
+
+2.总页数（pager_length） > 10 分别 以上面三种情况来展示
+	首先我们先确定 左右两边 展示个数 为2  分别是 开头 和 结尾 header tail <br/>
+	<strong>然后我们先做第一种情况左边没有 省略号 的</strong> <br/>
+	current 当前页 <br/>
+	offset = Math.floor(pager_length/2) 中间页 <br/>
+	main_page = pager_length-header-tail  页面显示..4 5 6 7 8 9 ... 4-9 中间的值 为 main_page <br/>
+	I.首先判断  current <= offset + 1 <br/>
+	  再循环 for( var i =0; i < header + main_page ; i++) <br/>
+	  然后 加入... 的 li <br/>
+	  最后打印最后 2 个 值 for (var i = pager_length - tail +1; i <= pager_length; i++)<br/>
+	<strong>根据上面的内容我们可以推出右边没有 省略号</strong><br/>
+	II. 首先判断  current >= pager_length-offset <br/>
+		再循环    for(var i = 0 ; i< header ; i ++) <br/>
+		然后再加入....<br/>
+		最后打印省略后面的值 for(var i = pager_length - main_page ; i <  pager_length ; i++)<br/>
+	<strong> 最后一种 两边带省略号的 是最难的：但是只要知道 从第几个开始到第几结束 就会发现容易了很多 </strong><br/>
+	 开始页 offset_m =（ main_length - 1 ）/ 2; <br/>
+	 结束页	counter = current + offset_m<br/>
+	 既然知道了我们想要的东西，那么开始实现：<br/>
+	 1. 首先遍历 前2个值 for(var i = 0 ; i< header ; i ++) <br/><br/>
+	 2. 然后再加入....<br/><br/>
+	 3. 再遍历中间的值 以 offset_m  开始 ，counter 结束 遍历 for (var i = offset_m+1; i <= counter  ; i++)<br/>
+	 4.  然后再加入....<br/><br/>
+	 5.最后在遍历最后 2个值  for(var i =  (pager_length- tall)+1 ;i<= pager_length ; i ++ )<br/>
+
+	 
+
+
+	
+
+
+
+
+
+>>>>>>> origin/master

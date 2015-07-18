@@ -37,6 +37,9 @@
 					color: '#808080'
 				}]
 			},
+			credits: {
+          		enabled:false
+			},
 			tooltip: {
 				valueSuffix: valueSuffix
 			},
@@ -53,36 +56,74 @@
 	/**
 	 * 饼图
 	 */
-	$.pieCharts = function(options){
-		var $charts = options.charts;
-		var title = options.title;
-		var series = options.series;
+		$.pieCharts = function(options) {
+			var $charts = options.charts;
+			var title = options.title;
+			var series = options.series;
 
-		$charts.highcharts({
-			chart: {
-				plotBackgroundColor: null,
-				plotBorderWidth: null,
-				plotShadow: false
-			},
-			title: {
-				text: 'Browser market shares at a specific website, 2010'
-			},
-			tooltip: {
-				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-			},
-			plotOptions: {
-				pie: {
-					allowPointSelect: true,
-					cursor: 'pointer',
-					dataLabels: {
-						enabled: false
-					},
-					showInLegend: true
-				}
-			},
-			series: series // map 对象
-		});
-	};
+			$charts.highcharts({
+				chart: {
+					plotBackgroundColor: null,
+					plotBorderWidth: null,
+					plotShadow: false
+				},
+				title: {
+					text: title
+				},
+				tooltip: {
+					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				credits: { //显示
+					enabled: false
+				},
+				legend:{
+					layout:"vertical", //图列布局
+					backgroundColor:"#FFFFFF", // 图列背景
+					floating:true,
+					align:'left',//图形位置
+					verticalAlign:'top',
+					y:90,
+					x:40,
+					labelFormatter:function(){//格式化标签
+						return this.name+'('+this.percentage+'%)';
+					}
+				},
+				plotOptions: {
+					pie: {
+						size:280,
+						innerSize:'150',
+						slicedOffset:"15", //块 位移
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							distance:5,
+							enabled: true,
+							connectorColor: '#000000',
+							formatter:function(){
+								return this.y+'%';
+							},
+							style: {
+								"color": "contrast",
+								"fontSize": "11px",
+								"fontWeight": "bold",
+								"textShadow": "0 0 2px contrast, 0 0 3px contrast"
+							}
+							// format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+						},
+						showInLegend:false,//百分比显示在文本框中
+						point:{
+							events:{
+								legendItemClick:function(){
+									this.select();
+									this.show();
+								}
+							}
+						}
+					}
+				},
+				series: series // map 对象
+			});
+		};
 
 	/**
 	 *	编辑器
@@ -410,8 +451,8 @@
 			}
 
 		});
-		
-		
 	}
 
+	
+	
 })(jQuery);

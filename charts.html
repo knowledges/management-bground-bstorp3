@@ -15,6 +15,7 @@
 	<![endif]-->
 
 	<!-- <link rel="stylesheet" href="css/xx-admin.css"> -->
+	<link rel="stylesheet" href="css/xx-mask.css">
 
 	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -27,6 +28,9 @@
 	<![endif]-->
 </head>
 <body>
+	<div id="iFrm-load" class="mask-load" style="display:none;">
+		<div class="mask-img"></div>
+	</div>
 	<div class="page-warpper">
 		<!-- 100% 宽度 -->
 		<div class="container-fluid">
@@ -457,7 +461,41 @@
 					]
 				}]
 			});
+			
+			
+			var heightCharts = function () {
+				var dtd = $.Deferred();
+				$.ajax({
+					url: 'js/local/heightChar.json',
+					type: 'GET',
+					dataType: 'json'
+				})
+				.done(function(result) {
+					dtd.resolve(result);
+				})
+				.fail(function() {
+					dtd.resolve();
+				});
+				return dtd;
+			};
+			var pieCharts = function () {
+				var dtd = $.Deferred();
+				$.ajax({
+					url: 'js/local/pieChar.json',
+					type: 'GET',
+					dataType: 'json'
+				})
+				.done(function(result) {
+					dtd.resolve(result);
+				})
+				.fail(function(result) {
+					dtd.resolve(result);
+				});
+				return dtd;
+			};
 
+			$.when(heightCharts(),pieCharts());
+			
 			
 		})
 	</script>
