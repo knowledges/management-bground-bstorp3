@@ -77,9 +77,7 @@ font-awesome-ie7.min.css <br/>
 
  <h1><a href="http://www.bootcss.com/p/bootstrap-datetimepicker/">日期时间选择器</a></h1>
  <h3>Bootstrap日期和时间表单组件。</h3>
-<<<<<<< HEAD
- 
-=======
+
 
 <h1><a href="falls.html">瀑布流</a></h1>
 <h3>初始化</h3>
@@ -138,14 +136,3 @@ I.true: 追加，false : 不显示。
 	 3. 再遍历中间的值 以 offset_m  开始 ，counter 结束 遍历 for (var i = offset_m+1; i <= counter  ; i++)<br/>
 	 4.  然后再加入....<br/><br/>
 	 5.最后在遍历最后 2个值  for(var i =  (pager_length- tall)+1 ;i<= pager_length ; i ++ )<br/>
-
-	 
-
-
-	
-
-
-
-
-
->>>>>>> origin/master
