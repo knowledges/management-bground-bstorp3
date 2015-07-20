@@ -2,128 +2,147 @@
 	/**
 	 * 折线图 
 	 */
-	$.lineCharts = function(options){
+	$.lineChart = function(options){
 		var defaults =['一月', '二月', '三月', '四月', '五月', '六月','七月', '八月', '九月', '十月', '十一月', '十二月'];
 		var $charts = options.charts;
-		var charttype = options.charttype || "";
 		var title = options.title || "";
 		var text = options.text || "";
-		var yAxistext = options.yAxistext || "";
+		var yAxis = options.yAxis || "";
 		var valueSuffix = options.valueSuffix || "";
-		var categories = options.categories || defaults;
+		var xAxis = options.xAxis || defaults;
+		var series = options.series || [];
+		for(var i in series){
+			$.each(series[i].data, function(index, val) {
+				 if (typeof(val)!="number") {
+				 	alert("series 里的数据内性 不是数值内性");
+					return;
+				 }
+			});
 
-		return $charts.highcharts({
-			chart: {
-                type: charttype
-            },
+		}
+
+		$charts.highcharts({
 			title: {
-				text: title,
-				x: -20 //center
-			},
-			subtitle: {
-				text: text,
-				x: -20
-			},
-			xAxis: {
-				categories: categories
-			},
-			yAxis: {
-				title: {
-					text: yAxistext
+					text: 'Monthly Average Temperature',
+					x: -20 //center
 				},
-				plotLines: [{
-					value: 0,
-					width: 1,
-					color: '#808080'
-				}]
-			},
-			credits: {
-          		enabled:false
-			},
-			tooltip: {
-				valueSuffix: valueSuffix
-			},
-			legend: {
-				layout: 'vertical',
-				align: 'right',
-				verticalAlign: 'middle',
-				borderWidth: 0
-			},
-			series: series //数组 格式 
+				subtitle: {
+					text: 'Source: WorldClimate.com',
+					x: -20
+				},
+				xAxis: {
+					categories: xAxis
+				},
+				yAxis: {
+					title: {
+						text: 'Temperature (°C)'
+					},
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				credits: {
+					enabled: false
+				},
+				tooltip: {
+					valueSuffix: '°C'
+				},
+				legend: {
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'middle',
+					borderWidth: 0
+				},
+			series: series
 		});
 	};
 
 	/**
 	 * 饼图
 	 */
-		$.pieCharts = function(options) {
-			var $charts = options.charts;
-			var title = options.title;
-			var series = options.series;
+	$.pieCharts = function(options) {
+		var $charts = options.charts;
+		var title = options.title;
+		var series = options.series;
 
-			$charts.highcharts({
-				chart: {
-					plotBackgroundColor: null,
-					plotBorderWidth: null,
-					plotShadow: false
-				},
-				title: {
-					text: title
-				},
-				tooltip: {
-					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-				},
-				credits: { //显示
-					enabled: false
-				},
-				legend:{
-					layout:"vertical", //图列布局
-					backgroundColor:"#FFFFFF", // 图列背景
-					floating:true,
-					align:'left',//图形位置
-					verticalAlign:'top',
-					y:90,
-					x:40,
-					labelFormatter:function(){//格式化标签
-						return this.name+'('+this.percentage+'%)';
-					}
-				},
-				plotOptions: {
-					pie: {
-						size:280,
-						innerSize:'150',
-						slicedOffset:"15", //块 位移
-						allowPointSelect: true,
-						cursor: 'pointer',
-						dataLabels: {
-							distance:5,
-							enabled: true,
-							connectorColor: '#000000',
-							formatter:function(){
-								return this.y+'%';
-							},
-							style: {
-								"color": "contrast",
-								"fontSize": "11px",
-								"fontWeight": "bold",
-								"textShadow": "0 0 2px contrast, 0 0 3px contrast"
-							}
-							// format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+		$.each(series, function(index, val) {
+			if (typeof(val[1])!='number' || typeof(val['y'])!='number' ) {
+				console.log(val[1]);
+			} else{
+				alert("series 里的数据内性 不是数值内性");
+				return;
+			}
+		});
+
+		$charts.highcharts({
+			chart: {
+				plotBackgroundColor: null,
+				plotBorderWidth: null,
+				plotShadow: false
+			},
+			title: {
+				text: title
+			},
+			tooltip: {
+				pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			},
+			credits: { //显示
+				enabled: false
+			},
+			legend:{
+				layout:"vertical", //图列布局
+				backgroundColor:"#FFFFFF", // 图列背景
+				floating:true,
+				align:'left',//图形位置
+				verticalAlign:'top',
+				y:90,
+				x:40,
+				labelFormatter:function(){//格式化标签
+					return this.name+'('+this.percentage+'%)';
+				}
+			},
+			plotOptions: {
+				pie: {
+					size:280,
+					innerSize:'150',
+					slicedOffset:"15", //块 位移
+					allowPointSelect: true,
+					cursor: 'pointer',
+					dataLabels: {
+						distance:5,
+						enabled: true,
+						connectorColor: '#000000',
+						formatter:function(){
+							return this.y+'%';
 						},
-						showInLegend:false,//百分比显示在文本框中
-						point:{
-							events:{
-								legendItemClick:function(){
-									this.select();
-									this.show();
-								}
+						style: {
+							"color": "contrast",
+							"fontSize": "11px",
+							"fontWeight": "bold",
+							"textShadow": "0 0 2px contrast, 0 0 3px contrast"
+						}
+						// format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+					},
+					showInLegend:false,//百分比显示在文本框中
+					point:{
+						events:{
+							legendItemClick:function(){
+								this.select();
+								this.show();
 							}
 						}
 					}
-				},
-				series: series // map 对象
-			});
-		};
+				}
+			},
+			series: [{
+						type: 'pie',
+						name: 'Browser share',
+						data: series
+					}]
+		});
+	};
 
 	/**
 	 *	编辑器
@@ -452,7 +471,42 @@
 
 		});
 	}
-
-	
+	/**
+	 * 时间格式化
+	 * @param  {[type]} obj    [description]
+	 * @param  {[type]} format [description]
+	 * @return {[type]}        [description]
+	 */
+	$.formatDate = function(obj, format) {
+		var date;
+		if (obj instanceof Date) {
+			date = obj;
+		} else if (this.type(obj) === "number") {
+			date = new Date(obj);
+		} else {
+			throw new Error('illegal arguments,only can be Date or millisecond');
+		}
+		if (!format) {
+			format = "yyyy-MM-dd hh:mm:ss";
+		}
+		var o = {
+			"M+": date.getMonth() + 1, //month 
+			"d+": date.getDate(), //day 
+			"h+": date.getHours(), //hour 
+			"m+": date.getMinutes(), //minute 
+			"s+": date.getSeconds(), //second 
+			"q+": Math.floor((date.getMonth() + 3) / 3), //quarter 
+			"S": date.getMilliseconds() //millisecond 
+		};
+		if (/(y+)/.test(format)) {
+			format = format.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+		}
+		for (var k in o) {
+			if (new RegExp("(" + k + ")").test(format)) {
+				format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+			}
+		}
+		return format;
+	};
 	
 })(jQuery);

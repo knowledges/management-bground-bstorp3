@@ -318,6 +318,7 @@
 			</div>
 		</div>
 	</div>
+</body>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="js/jquery-1.10.2.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
@@ -330,139 +331,6 @@
 	<script>
 		$(function(){
 
-			/**
-			 * 折线图
-			 */
-			$('#l-Charts').highcharts({
-				title: {
-					text: 'Monthly Average Temperature',
-					x: -20 //center
-				},
-				subtitle: {
-					text: 'Source: WorldClimate.com',
-					x: -20
-				},
-				xAxis: {
-					categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-				},
-				yAxis: {
-					title: {
-						text: 'Temperature (°C)'
-					},
-					plotLines: [{
-						value: 0,
-						width: 1,
-						color: '#808080'
-					}]
-				},
-				credits: {
-          			enabled:false
-				},
-				tooltip: {
-					valueSuffix: '°C'
-				},
-				legend: {
-					layout: 'vertical',
-					align: 'right',
-					verticalAlign: 'middle',
-					borderWidth: 0
-				},
-				series: [{
-					name: 'Tokyo',
-					data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-				}, {
-					name: 'New York',
-					data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-				}, {
-					name: 'Berlin',
-					data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-				}, {
-					name: 'London',
-					data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-				}]
-			});
-			/**
-			 * 环形图
-			 */
-			$('#pie-Charts').highcharts({
-				chart: {
-					plotBackgroundColor: null,
-					plotBorderWidth: null,
-					plotShadow: false
-				},
-				title: {
-					text: '浏览器 pie 环形图'
-				},
-				tooltip: {
-					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-				},
-				credits: { //显示
-          			enabled:false
-				},
-				legend:{
-					layout:"vertical", //图列布局
-					backgroundColor:"#FFFFFF", // 图列背景
-					floating:true,
-					align:'left',//图形位置
-					verticalAlign:'top',
-					y:90,
-					x:40,
-					labelFormatter:function(){//格式化标签
-						return this.name+'('+this.percentage+'%)';
-					}
-				},
-				plotOptions: {
-					pie: {
-						size:280,
-						innerSize:'150',
-						slicedOffset:"15", //块 位移
-						allowPointSelect: true,
-						cursor: 'pointer',
-						dataLabels: {
-							distance:5,
-							enabled: true,
-							connectorColor: '#000000',
-							formatter:function(){
-								return this.y+'%';
-							},
-							style: {
-								"color": "contrast",
-								"fontSize": "11px",
-								"fontWeight": "bold",
-								"textShadow": "0 0 2px contrast, 0 0 3px contrast"
-							}
-							// format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-						},
-						showInLegend:false,//百分比显示在文本框中
-						point:{
-							events:{
-								legendItemClick:function(){
-									this.select();
-									this.show();
-								}
-							}
-						}
-					}
-				},
-				series: [{
-					type: 'pie',
-					name: 'Browser share',
-					data: [
-						['Firefox', 45.0],
-						['IE', 26.8], {
-							name: 'Chrome',
-							y: 12.8,
-							sliced: true,
-							selected: true
-						},
-						['Safari', 8.5],
-						['Opera', 6.2],
-						['Others', 0.7]
-					]
-				}]
-			});
-			
-			
 			var heightCharts = function () {
 				var dtd = $.Deferred();
 				$.ajax({
@@ -491,13 +359,96 @@
 				.fail(function(result) {
 					dtd.resolve(result);
 				});
-				return dtd;
+				return dtd.promise();
 			};
 
-			$.when(heightCharts(),pieCharts());
-			
+			/**
+			 * 折线图
+			 */
+			function getHeightCharts (data) {
+				var response = data.response,list = response.list;
+
+				if (jQuery.isEmptyObject(response)) {
+					return;
+				}
+
+				var xAxis = [];
+	            var series = [];
+	            for (var i in list) {
+	                // X轴数据
+	                if (list[0].map) {
+	                    $.each(list[0].map, function(idx, elem) {
+	                        xAxis.push($.formatDate(parseInt(idx),'yyyy/MM/dd'));
+	                    });
+	                };
+	                // 折线图数据
+	                var map = {};
+	                var data = [];
+	                $.each(list[i].map, function(n, m) {
+	                     data.push(parseFloat(m));
+	                });
+	                map['name'] = list[i].name;
+	                map['data'] = data;
+	                series.push(map);
+	            }
+				$.lineChart({
+					charts:$('#l-Charts'),
+					title:"首页折线统计图",
+					text:"。c",
+					valueSuffix:"",
+					xAxis:xAxis,
+					series:series
+				});
+			}
+
+			/**
+			 * 饼图
+			 */
+			function getPieCharts (data) {
+				var list = data.__wrapObject;
+				var series = [];
+				if( list == null){
+					return;
+				}
+				var sum = 0;
+				$.each(list, function(idx, val) {
+					sum+= val;
+				});
+
+				$.each(list, function(idx, val) {
+					var map = [];
+					if (idx == "IE") {
+						var listMap = {};
+						listMap["name"] =  idx;
+						listMap['y'] = parseFloat(((val/sum)*100).toFixed(2));
+						listMap['sliced'] = true;
+						listMap['selected'] = true;
+						series.push(listMap);
+					} else{
+						map[0] = idx;
+						map[1] = parseFloat(((val/sum)*100).toFixed(2));
+						series.push(map);
+					}
+				});
+				$.pieCharts({
+					charts:$('#pie-Charts'),
+					title:"浏览器 pie 环形图",
+					series:series
+				});
+			}
+			function init () {
+				$.when(heightCharts(),pieCharts())
+				.done(function(data1,data2){
+					getHeightCharts(data1);
+					getPieCharts(data2);
+				})
+				.fail(function () {
+					alert("出错了....");
+				});
+			}
+
+			init ();
 			
 		})
 	</script>
-</body>
 </html>
