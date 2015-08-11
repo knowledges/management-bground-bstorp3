@@ -18,7 +18,6 @@
 					return;
 				 }
 			});
-
 		}
 
 		$charts.highcharts({
